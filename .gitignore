@@ -1,1 +1,3 @@
 /.idea
+/composer.lock
+/engine/Core/Database/config.php
