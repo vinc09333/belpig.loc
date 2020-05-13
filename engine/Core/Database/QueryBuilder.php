@@ -1,7 +1,7 @@
 <?php
 
 namespace Engine\Core\Database;
-use Engine\Core\Database\Connection;
+
 class QueryBuilder
 {
     /**
@@ -56,25 +56,12 @@ class QueryBuilder
      */
     public function where($column, $value, $operator = '=')
     {
-        $this->sql['where'][] = "{$column}{$operator}{$value}";
-        $this->values[] = $value;
-
-        return $this;
-    }
-    public function whereRole($column, $value, $operator = '=')
-    {
-        $this->sql['where'][] = "{$column}{$operator}'{$value}'";
+        $this->sql['where'][] = "{$column} {$operator} ?";
         $this->values[] = $value;
 
         return $this;
     }
 
-    public function offset($value)
-    {
-        $this->sql['offset'] = " OFFSET {$value}";
-        $this->values[] = $value;
-        return $this;
-    }
     /**
      * @param $field
      * @param $order
@@ -113,8 +100,7 @@ class QueryBuilder
     public function insert($table)
     {
         $this->reset();
-        $this->sql['insert'] = /** @lang text */
-            "INSERT INTO {$table} ";
+        $this->sql['insert'] = "INSERT INTO {$table} ";
 
         return $this;
     }
@@ -129,7 +115,7 @@ class QueryBuilder
 
         if(!empty($data)) {
             foreach ($data as $key => $value) {
-                $this->sql['set'] .= "{$key} ='{$value}'";
+                $this->sql['set'] .= "{$key} = ?";
                 if (next($data)) {
                     $this->sql['set'] .= ", ";
                 }

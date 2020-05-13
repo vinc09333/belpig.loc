@@ -8,10 +8,9 @@ class Config
     /**
      * Retrieves a config item.
      *
-     * @param string $key
-     * @param string $group
+     * @param  string  $key
+     * @param  string  $group
      * @return mixed
-     * @throws \Exception
      */
     public static function item($key, $group = 'main')
     {
@@ -25,9 +24,8 @@ class Config
     /**
      * Retrieves a group config items.
      *
-     * @param string $group The item group.
+     * @param  string  $group  The item group.
      * @return mixed
-     * @throws \Exception
      */
     public static function group($group)
     {

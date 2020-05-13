@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Engine\Core\Router;
-
 
 class UrlDispatcher
 {
@@ -13,20 +11,22 @@ class UrlDispatcher
         'GET',
         'POST'
     ];
+
     /**
      * @var array
      */
     private $routes = [
-        'GET' => [],
+        'GET'  => [],
         'POST' => []
     ];
+
     /**
      * @var array
      */
     private $patterns = [
-        'int'=> '[0-9]+',
-        'str'=> '[a-zA-Z\.\-_]+',
-        'any'=> '[a-zA-Z0-9\.\-_]+'
+        'int' => '[0-9]+',
+        'str' => '[a-zA-Z\.\-_%]+',
+        'any' => '[a-zA-Z0-9\.\-_%]+'
     ];
 
     /**
@@ -60,14 +60,15 @@ class UrlDispatcher
 
     /**
      * @param $pattern
-     * @return string|string[]|null
+     * @return mixed
      */
     private function convertPattern($pattern)
     {
-        if(strpos($pattern, '(' ) === false)
+        if(strpos($pattern, '(') === false)
         {
             return $pattern;
         }
+
         return preg_replace_callback('#\((\w+):(\w+)\)#', [$this, 'replacePattern'], $pattern);
     }
 
@@ -86,29 +87,32 @@ class UrlDispatcher
      */
     private function processParam($parameters)
     {
-        foreach ($parameters as $key => $value)
+        foreach($parameters as $key => $value)
         {
-            if (is_int($key))
+            if(is_int($key))
             {
                 unset($parameters[$key]);
             }
         }
+
         return $parameters;
     }
 
     /**
      * @param $method
      * @param $uri
-     * @return DispatchedRoute
+     * @return DispatchedRoute|void
      */
-    public function dispatch($method,$uri)
+    public function dispatch($method, $uri)
     {
         $routes = $this->routes(strtoupper($method));
-        if(array_key_exists($uri,$routes))
+
+        if(array_key_exists($uri, $routes))
         {
             return new DispatchedRoute($routes[$uri]);
         }
-        return $this->doDispatch($method,$uri);
+
+        return $this->doDispatch($method, $uri);
     }
 
     /**
@@ -116,12 +120,13 @@ class UrlDispatcher
      * @param $uri
      * @return DispatchedRoute
      */
-    public function doDispatch($method, $uri)
+    private function doDispatch($method, $uri)
     {
-        foreach ($this->routes($method) as $route =>$controller)
+        foreach($this->routes($method) as $route => $controller)
         {
             $pattern = '#^' . $route . '$#s';
-            if (preg_match($pattern, $uri, $parameters))
+
+            if(preg_match($pattern, $uri, $parameters))
             {
                 return new DispatchedRoute($controller, $this->processParam($parameters));
             }
