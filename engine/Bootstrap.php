@@ -4,25 +4,22 @@ use Engine\Cms;
 use Engine\DI\DI;
 require_once __DIR__ . "/../vendor/autoload.php";
 try{
-    /**
-     * Dependency Injection
-     */
+    // Dependency injection
     $di = new DI();
+
     $services = require __DIR__ . '/Config/Service.php';
-    /**
-     * Init Service
-     */
-    foreach ($services as $service)
-    {
+    // Init services
+    foreach ($services as $service) {
         $provider = new $service($di);
         $provider->init();
     }
-    /**
-     * @RUN_CMS
-     */
+
+    // Init models
+    $di->set('model', []);
+
     $cms = new Cms($di);
     $cms->run();
-}catch (\ErrorException $e)
-{
+
+}catch (\ErrorException $e) {
     echo $e->getMessage();
 }
