@@ -13,7 +13,8 @@ class Cms
      */
     private $di;
     public $router;
-    //public $db;
+    public $db;
+    public $auth;
 
     /**
      * Cms constructor.
@@ -23,7 +24,6 @@ class Cms
     {
         $this->di = $di;
         $this->router = $this->di->get('router');
-        //$this->db = $this->di->get('db');
     }
 
     /**
@@ -32,9 +32,7 @@ class Cms
     public function run()
     {
         try {
-            $this->router->add('home', '/', 'HomeController:index');
-            $this->router->add('news', '/news', 'HomeController:news');
-            $this->router->add('news_single', '/news/(id:int)', 'HomeController:news');
+            require_once __DIR__ . '/../cms/Route.php';
 
             $routerDispatch = $this->router->dispatch(Common::getMethod(), Common::getPathUrl() );
             if ($routerDispatch == null)
