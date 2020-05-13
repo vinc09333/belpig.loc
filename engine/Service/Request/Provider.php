@@ -1,23 +1,25 @@
 <?php
 
-
 namespace Engine\Service\Request;
 
-use Engine\Core\Request\Request;
 use Engine\Service\AbstractProvider;
+use Engine\Core\Request\Request;
 
 class Provider extends AbstractProvider
 {
+
     /**
      * @var string
      */
     public $serviceName = 'request';
+
     /**
-     * @inheritDoc
+     * @return mixed
      */
-    function init()
+    public function init()
     {
         $request = new Request();
+
         $this->di->set($this->serviceName, $request);
     }
 }
