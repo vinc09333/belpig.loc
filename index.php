@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 define('ROOT_DIR', __DIR__);
 
 define('ENV', 'Cms');
-define('Core', 'engine/Core/');
 define('DS', DIRECTORY_SEPARATOR);
-require_once 'engine/Bootstrap.php';
 
+require_once 'engine/Bootstrap.php';
