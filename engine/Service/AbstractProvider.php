@@ -2,21 +2,18 @@
 
 namespace Engine\Service;
 
-
-use Engine\DI\DI;
-
 abstract class AbstractProvider
 {
     /**
-     * @var DI;
+     * @var \Engine\DI\DI;
      */
     protected $di;
 
     /**
      * AbstractProvider constructor.
-     * @param DI $di
+     * @param \Engine\DI\DI $di
      */
-    public function __construct(DI $di)
+    public function __construct(\Engine\DI\DI $di)
     {
         $this->di = $di;
     }
