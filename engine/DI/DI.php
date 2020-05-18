@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Engine\DI;
-
 
 class DI
 {
@@ -13,22 +11,23 @@ class DI
 
     /**
      * @param $key
-     * @return mixed
-     */
-    public function get($key)
-    {
-        return $this->container[$key];
-    }
-
-    /**
-     * @param $key
      * @param $value
      * @return $this
      */
     public function set($key, $value)
     {
         $this->container[$key] = $value;
-        return$this;
+
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public function get($key)
+    {
+        return $this->has($key);
     }
 
     /**

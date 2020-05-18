@@ -61,6 +61,13 @@ class QueryBuilder
 
         return $this;
     }
+    public function wheres($column, $value, $operator = '=')
+    {
+        $this->sql['where'][] = "{$column} {$operator} {$value}";
+        $this->values[] = $value;
+
+        return $this;
+    }
 
     /**
      * @param $field
@@ -116,6 +123,22 @@ class QueryBuilder
         if(!empty($data)) {
             foreach ($data as $key => $value) {
                 $this->sql['set'] .= "{$key} = ?";
+                if (next($data)) {
+                    $this->sql['set'] .= ", ";
+                }
+                $this->values[]    = $value;
+            }
+        }
+
+        return $this;
+    }
+    public function add($data = [])
+    {
+        $this->sql['set'] .= "SET ";
+
+        if(!empty($data)) {
+            foreach ($data as $key => $value) {
+                $this->sql['set'] .= "{$key}='{$value}'";
                 if (next($data)) {
                     $this->sql['set'] .= ", ";
                 }
