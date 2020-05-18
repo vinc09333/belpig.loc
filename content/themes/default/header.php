@@ -40,11 +40,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <?php //foreach(Menu::getItems(1) as $item):?>
+                <?php foreach(Menu::getItems() as $item):?>
                 <li>
-                    <a></a>
+                    <a href="<?= $item->link ?>"><?= $item->name ?></a>
                 </li>
-                <?php //endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
