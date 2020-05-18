@@ -18,7 +18,7 @@ var page = {
 
             },
             success: function(result){
-                console.log(result);
+                console.log(formData);
                 window.location = '/admin/pages/edit/' + result;
             }
         });
