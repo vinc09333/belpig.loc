@@ -9,6 +9,7 @@
 
     <title>Админ-панель</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/admin/Assets/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,18 +22,22 @@
     <!-- Redactor CSS -->
     <link rel="stylesheet" href="/admin/Assets/js/plugins/redactor/redactor.css">
 </head>
-<body>
+<body class="font-face">
 <header>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="container navbar navbar-toggler navbar-dark bg-dark  fixed-top">
         <div class="container">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">Admin CMS</a>
+            <a class="navbar-brand" href="/admin/">
+                <?= $lang->dashboardMenu['cpanel']?>
+            </a>
+            <a class="navbar-brand icon-logout icons" href="/admin/logout/">
+            </a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/admin/">
                             <i class="icon-speedometer icons"></i>
                             <?= $lang->dashboardMenu['home'] ?>
                         </a>
@@ -50,19 +55,26 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
+                        <a class="nav-link" href="/admin/users/">
+                            <i class="icon-user icons"></i>
+                            <?= $lang->dashboardMenu['users']?>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a class="nav-link" href="/admin/settings/general/">
                             <i class="icon-equalizer icons"></i>
                             <?= $lang->dashboardMenu['settings'] ?>
                         </a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="/admin/logout/">
+                            <i class="icon-logout icons"></i>
+                            <?= $lang->dashboardMenu['logout']?>
+                        </a>
+                    </li>
                 </ul>
-            </div>
-
-            <div class="right-toolbar">
-                <a href="/admin/logout/">
-                    <i class="icon-logout icons"></i> Logout
-                </a>
             </div>
         </div>
     </nav>
+    <br>
 </header>
